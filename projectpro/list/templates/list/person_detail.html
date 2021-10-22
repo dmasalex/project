@@ -1,0 +1,163 @@
+{% extends 'list/base_person.html' %}
+
+{% block title %}
+{{ person.name }}
+{% endblock %}
+
+{% block content %}
+<h3>Карточка сотрудника</h3>
+<div class="card" style="width: 60rem;">
+    <div class="card-header">
+
+        <h4>
+            ФИО
+        </h4>
+
+        <li class="list-group-item">
+
+            {{ person.name }}
+
+        </li>
+    </div>
+
+    <div class="card" style="width: 60rem;">
+        <div class="card-header">
+
+            <h4>
+                Дата создания карточки
+            </h4>
+
+            <li class="list-group-item">
+
+                {{ person.create_date }}
+
+            </li>
+        </div>
+
+        <div class="card" style="width: 60rem;">
+            <div class="card-header">
+
+                <h4>
+                    Контакты
+                </h4>
+
+                <li class="list-group-item">
+
+                    {{ person.phone }}, {{ person.email }}
+
+                </li>
+            </div>
+
+            <div class="card" style="width: 60rem;">
+                <div class="card-header">
+
+                    <h4>
+                        Должность
+                    </h4>
+
+                    <li class="list-group-item">
+
+                        {{ person.position }}
+
+                    </li>
+                </div>
+
+
+                <div class="card" style="width: 60rem;">
+                    <div class="card-header">
+
+                        <h4>
+                            Доступы к организациям
+                        </h4>
+
+                        <li class="list-group-item">
+
+                            {% for org in person.organization.all %}
+                            {{ org.name }},
+                            {% endfor%}
+
+                        </li>
+                    </div>
+
+                    <div class="card" style="width: 60rem;">
+                        <div class="card-header">
+
+                            <h4>
+                                Документы
+                            </h4>
+
+                            <li class="list-group-item">
+
+                                {{ person.document }}: {{ person.series }},
+                                {{ person.number }}, {{ person.organ }},
+                                {{ person.date_of_issue }}
+
+                            </li>
+                        </div>
+                        <div class="card" style="width: 60rem;">
+                            <div class="card-header">
+
+                                <h4>
+                                    Регистрация
+                                </h4>
+
+                                <li class="list-group-item">
+
+                                    {{ person.place_of_life }}
+
+                                </li>
+                            </div>
+
+                            <div class="card" style="width: 60rem;">
+                                <div class="card-header">
+
+                                    <h4>
+                                        Дата, место рождения
+                                    </h4>
+
+                                    <li class="list-group-item">
+
+                                        {{ person.date_of_birth }}, {{ person.place_of_birth }}
+
+                                    </li>
+                                </div>
+
+                                <div class="card" style="width: 60rem;">
+                                    <div class="card-header">
+
+                                        <h4>
+                                            Права
+                                        </h4>
+
+                                        <li class="list-group-item">
+
+                                            {{ person.funct }}
+
+                                        </li>
+                                    </div>
+                                    <div class="card" style="width: 60rem;">
+                                        <div class="card-header">
+
+                                            <h4>
+                                                Группа допуска по ЭБ
+                                            </h4>
+
+                                            <li class="list-group-item">
+
+                                                {{ person.access }}
+
+                                            </li>
+                                        </div>
+
+
+                                        <td>
+                                            <a href="{{ admin_object.get_update_url }}"
+                                               class="btn btn-outline-secondary">Редактировать</a>
+                                            </tr>
+
+                                        <td>
+                                            <a href="{{ admin_object.get_delete_url }}"
+                                               class="btn btn-outline-danger delete"
+                                               style="{% if detail %}display: block;{% endif %}">Удалить</a>
+                                            </tr>
+                                            {% endblock %}

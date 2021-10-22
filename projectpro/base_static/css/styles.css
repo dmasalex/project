@@ -1,0 +1,16 @@
+.admin-panel {
+    border: 1px colid #999;
+    position: fixed;
+    right: 50px;
+    bottom: 50px;
+    opacity: 0.5;
+    padding 15px;
+}
+
+.admin-panel:hover {
+    opacity: 1;
+}
+
+a.edit, a.delete {
+    display: none;
+}

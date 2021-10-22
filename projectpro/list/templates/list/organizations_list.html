@@ -1,0 +1,45 @@
+{% extends 'list/base_person.html' %}
+
+{% block title %}
+    Организации
+{% endblock %}
+
+
+{% block content %}
+<h2 class="mb-3">Список организаций</h2>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">id</th>
+        <th scope="col">Организация</th>
+        <th scope="col">Отправитель</th>
+        <th scope="col">Авто-отправка</th>
+        <th scope="col">Контакты</th>
+        <th scope="col">Действие</th>
+
+    </tr>
+    </thead>
+    {% for organization in page_object.object_list %}
+    <tbody>
+    <tr>
+        <th scope="row">{{ organization.pk }}</th>
+        <td>{{ organization.name }}</td>
+        <td>{{ organization.sender }}</td>
+        <td>{{ organization.is_auto }}</td>
+
+        <td>
+
+            {% for cont in organization.contacts.all %}
+            {{ cont.email }},
+            {% endfor%}
+
+        </td>
+
+        <td><a class="btn btn-outline-secondary" href="{{ organization.get_absolute_url }}" role="button">Просмотр</a>
+        </td>
+
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

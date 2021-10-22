@@ -1,0 +1,55 @@
+{% extends 'list/base_person.html' %}
+
+{% block title %}
+Сотрудники
+{% endblock %}
+
+
+{% block content %}
+
+<h2 class="mb-3">Список сотрудников</h2>
+
+<nav class="navbar navbar-light bg-light">
+  <div class="container-fluid">
+    <form class="d-flex" action="{% url 'persons_list_url' %}">
+      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
+      <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+  </div>
+</nav>
+<hr />
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th scope="col">id</th>
+        <th scope="col">ФИО</th>
+        <th scope="col">Должность</th>
+        <th scope="col">Телефон</th>
+        <th scope="col">Доступы</th>
+        <th scope="col">Действие</th>
+    </tr>
+    </thead>
+    {% for person in page_object.object_list %}
+    <tbody>
+    <tr>
+        <th scope="row">{{ person.pk }}</th>
+        <td>{{ person.name }}</td>
+        <td>{{ person.position }}</td>
+        <td>{{ person.phone }}</td>
+        <td>
+
+            {% for org in person.organization.all %}
+            {{ org.name }},
+            {% endfor%}
+
+        </td>
+        <td><a class="btn btn-outline-secondary" href="{{ person.get_absolute_url }}" role="button">Просмотр</a>
+        </td>
+
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

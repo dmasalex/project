@@ -1,0 +1,80 @@
+{% extends 'list/base_person.html' %}
+
+{% block title %}
+{{ organization.name }}
+{% endblock %}
+
+{% block content %}
+<h3>Карточка организации</h3>
+<div class="card" style="width: 60rem;">
+    <div class="card-header">
+        <h4>
+            Организация
+        </h4>
+        <li class="list-group-item">
+            {{ organization.name }}
+        </li>
+    </div>
+
+    <div class="card-header">
+        <h4>
+            Отправка писем от:
+        </h4>
+        <li class="list-group-item">
+            {{ organization.sender }}
+        </li>
+    </div>
+
+    <div class="card" style="width: 60rem;">
+        <div class="card-header">
+            <h4>
+                Авто отправка
+            </h4>
+            <li class="list-group-item">
+                {{ organization.is_auto }}
+            </li>
+        </div>
+
+        <div class="card" style="width: 60rem;">
+            <div class="card-header">
+                <h4>
+                    Доступы имеют:
+                </h4>
+                <li class="list-group-item">
+                    {% for person in organization.persons.all %}
+                    {{ person.name }},
+                    {% endfor%}
+                </li>
+            </div>
+
+
+            <div class="card" style="width: 60rem;">
+                <div class="card-header">
+                    <h4>
+                        Контакты:
+                    </h4>
+                    <li class="list-group-item">
+                        {% for cont in organization.contacts.all %}
+                        {{ cont.email }},
+                        {% endfor%}
+                    </li>
+                </div>
+
+                <td>
+                    <a href="{% url 'modification_url' slug=organization.slug %}" class="btn btn-outline-primary">Редактировать
+                        контакты</a>
+                    </tr>
+                <td>
+                    <a href="{{ admin_object.get_update_url }}" class="btn btn-outline-secondary">Редактировать организацию</a>
+                    </tr>
+
+                <td>
+                    <a href="{{ admin_object.get_delete_url }}" class="btn btn-outline-danger delete"
+                       style="{% if detail %}display: block;{% endif %}">Удалить организацию</a>
+                    </tr>
+
+                <td><a href="{% url 'createlist_url' slug=organization.slug %}" class="btn btn-outline-dark">Формирование списка доступов</a></tr>
+
+                <td><a href="{% url 'sendmail_url' slug=organization.slug %}" class="btn btn-outline-success">Отправить список</a></tr>
+
+                    {% endblock %}

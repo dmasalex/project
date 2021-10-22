@@ -1,0 +1,6 @@
+{% extends 'base.html' %}
+
+{% block admin-panel %}
+    <a href="{% url 'person_create_url' %}" class="btn btn-outline-primary">Добавить сотрудника</a>
+    <a href="{% url 'organization_create_url' %}" class="btn btn-outline-primary">Добавить организацию</a>
+{% endblock %}
